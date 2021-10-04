@@ -89,17 +89,31 @@ Buzzer_TurnOff(&myBuz); //turn off the buzzer
 
 # Driver data type
 
-## Buzzer_t 
+## `Buzzer_t` 
 
-### Description
+#### Brief
 
-This data type is struct that contain two members (buzzer port and pin)
+All buzzers must be an object from `Buzzer_t` data types and **must be initialized**
 
-### Size
+#### Initialization  
 
-**2 Bytes**
+```c
+Buzzer_t BuzzerName = {PORT,PIN};
+```
 
-### Notes and warning
+1. **Port name** 🡆 `PORTA`, `PORTB`, `PORTC`, `PORTD`
+2. **Pin number** 🡆 `PIN0`, `PIN1`, `PIN2`, `PIN3`, `PIN4`, ..., `PIN7`
 
-All object from `Buzzer_t` must be initialized
+#### Example
+
+```c
+/*
+* Connect buzzer at B0
+*/
+LED_t GreenLed = {PORTB,PIN0}; 
+```
+
+#### Size
+
+**2** bytes
 
