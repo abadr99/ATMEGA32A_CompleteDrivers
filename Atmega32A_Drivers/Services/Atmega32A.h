@@ -12,6 +12,9 @@
 /*Cpu frequency*/
 #define CPU_FREQUENCY	(8000000UL)
 
+/*Define null*/
+#define NULL			(0)
+
 /*Define microcontroller pins*/
 #define PIN7	(7)
 #define PIN6	(6)
@@ -178,7 +181,6 @@
 #define MCUCSR_REG		(*(( volatile uint8_t * )0X54))
 #define MCUCSR_JTD_BIT		(7)
 #define MCUCSR_ISC2_BIT		(6)
-#define MCUCSR__BIT		    (5)
 #define MCUCSR_JTRF_BIT		(4)
 #define MCUCSR_WDRF_BIT		(3)
 #define MCUCSR_BORF_BIT		(2)

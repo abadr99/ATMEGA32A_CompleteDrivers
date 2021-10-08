@@ -20,7 +20,7 @@
 /****************************/
 
 /*Configuration of the LCD connection*/
-#define CLCD_PORT		(PORTC)
+#define CLCD_PORT		(PORTD)
 #define CLCD_RS_PORT	(PORTD)
 #define CLCD_RS_PIN		(PIN0)
 #define CLCD_RW_PORT	(PORTD)

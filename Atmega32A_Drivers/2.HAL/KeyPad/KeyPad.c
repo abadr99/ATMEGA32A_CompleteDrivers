@@ -43,6 +43,7 @@ void KeyPad_Setup(void)
 }
 void KeyPad_GetValue(uint8_t *ReturnedValue)
 {
+	*ReturnedValue = KEYPAD_NOT_PRESSED;
 	#if KEYPAD_TYPE == KeyPad_4x4
 		uint8_t KeyPad_Arr[4][4] = KEYPAD_CHARACTERS;
 		const uint8_t Col_Arr[4] = {KEYPAD_COL0,KEYPAD_COL1,KEYPAD_COL2,KEYPAD_COL3};

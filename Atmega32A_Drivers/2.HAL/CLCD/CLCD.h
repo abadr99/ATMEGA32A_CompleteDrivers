@@ -25,10 +25,11 @@ void CLCD_ShiftCursorLeft(void);
 void CLCD_ShiftDisplayLeft(void);
 void CLCD_ShiftDisplayRight(void);
 void CLCD_PrintChar(char Ch);
-void CLCD_PrintNumber(uint16_t Number);
+void CLCD_PrintNumber(int16_t Number);
 void CLCD_StoreSpecialCharater(uint8_t PixelsArray[] , uint8_t Location);
 void CLCD_PrintSpecialCharacter(uint8_t Location);
 void CLCD_ClearCLCD(void);
+void CLCD_PrintFloat(float32_t Number);
 
 
 #endif /* CLCD_H_ */

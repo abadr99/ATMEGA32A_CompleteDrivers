@@ -4,7 +4,7 @@
  *  Created on: Oct 2, 2021
  *      Author: Abdelrhman
  */
-#include "stdint.h"
+#include "Std_DataType.h"
 #include "Math.h"
 #include "Atmega32A.h"
 #include "Error.h"
@@ -365,11 +365,16 @@ void CLCD_PrintChar(char Ch)
 {
 	CLCD_SendData(Ch);
 }
-void CLCD_PrintNumber(uint16_t Number)
+void CLCD_PrintNumber(int16_t Number)
 {
 	uint8_t NumberDigitsArray[16];
 	uint8_t NumberDigitArrayIndex = 0;
 	uint8_t i;
+	if(Number < 0)
+	{
+		Number *= -1; /*change to positive number*/
+		CLCD_PrintChar('-'); /*Print negative sign*/
+	}
 	while(Number != 0)
 	{
 		NumberDigitsArray[NumberDigitArrayIndex] = Number % 10;
@@ -413,4 +418,14 @@ void CLCD_PrintSpecialCharacter(uint8_t Location)
 void CLCD_ClearCLCD(void)
 {
 	CLCD_SendInstruction(CLCD_CLEAR_DISPLAY);
+}
+
+void CLCD_PrintFloat(float32_t Number)
+{
+	uint16_t IntegerPart = (uint32_t)Number;
+	uint8_t DecimalPart = (uint8_t)((Number - IntegerPart)*100);
+	CLCD_PrintNumber(IntegerPart);
+	CLCD_PrintChar('.');
+	CLCD_PrintNumber(DecimalPart);
+
 }

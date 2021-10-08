@@ -26,4 +26,9 @@ typedef signed long long     int64_t;
 typedef float 	float32_t;
 typedef double 	float64_t;
 
+/*bool*/
+typedef enum
+{
+	false,true,
+}bool;
 #endif /* STD_DATATYPES_H_ */
