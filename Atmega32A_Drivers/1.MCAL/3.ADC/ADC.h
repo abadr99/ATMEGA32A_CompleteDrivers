@@ -1,0 +1,99 @@
+/*
+ * ADC.h
+ *
+ *  Created on: Oct 9, 2021
+ *      Author: Abdelrhman Badr
+ */
+
+#ifndef ADC_H_
+#define ADC_H_
+
+
+/*Define ADC Channel*/
+#define ADC_SINGLE_ENDED_ADC0	(0)
+#define ADC_SINGLE_ENDED_ADC1	(1)
+#define ADC_SINGLE_ENDED_ADC2	(2)
+#define ADC_SINGLE_ENDED_ADC3	(3)
+#define ADC_SINGLE_ENDED_ADC4	(4)
+#define ADC_SINGLE_ENDED_ADC5	(5)
+#define ADC_SINGLE_ENDED_ADC6	(6)
+#define ADC_SINGLE_ENDED_ADC7	(7)
+#define ADC_SINGLE_ENDED_VBG	(30)
+#define ADC_SINGLE_ENDED_GND	(31)
+/*<< Differential_ADCXY_zX --> ADCX - ADCY with gain z >>*/
+#define ADC_DIFFRENTIAL_ADC00_10X	(8)
+#define ADC_DIFFRENTIAL_ADC10_10X	(9)
+#define ADC_DIFFRENTIAL_ADC00_200X	(10)
+#define ADC_DIFFRENTIAL_ADC10_200X	(11)
+#define ADC_DIFFRENTIAL_ADC22_10X	(12)
+#define ADC_DIFFRENTIAL_ADC32_10X	(13)
+#define ADC_DIFFRENTIAL_ADC22_200X	(14)
+#define ADC_DIFFRENTIAL_ADC32_200X	(15)
+#define ADC_DIFFRENTIAL_ADC01_1X	(16)
+#define ADC_DIFFRENTIAL_ADC11_1X	(17)
+#define ADC_DIFFRENTIAL_ADC21_1X	(18)
+#define ADC_DIFFRENTIAL_ADC31_1X	(19)
+#define ADC_DIFFRENTIAL_ADC41_1X	(20)
+#define ADC_DIFFRENTIAL_ADC51_1X	(21)
+#define ADC_DIFFRENTIAL_ADC61_1X	(22)
+#define ADC_DIFFRENTIAL_ADC71_1X	(23)
+#define ADC_DIFFRENTIAL_ADC02_1X	(24)
+#define ADC_DIFFRENTIAL_ADC12_1X	(25)
+#define ADC_DIFFRENTIAL_ADC22_1X	(26)
+#define ADC_DIFFRENTIAL_ADC32_1X	(27)
+#define ADC_DIFFRENTIAL_ADC42_1X	(28)
+#define ADC_DIFFRENTIAL_ADC52_1X	(29)
+
+/*
+ * This global variable is used to get the ADC value in case of ADC_StartConversionAsynch
+*/
+extern uint16_t ADC_ReadingValue;
+
+/*
+ *@brief: This function is use to initiate ADC 
+ *@Para :  void
+ *@Return: void
+ */
+void ADC_Initiate(void);
+/*
+ *@brief: This function is use to start ADC conversion using busy waiting 
+ *@Para :  1) ADC_Channel
+ *`ADC_SINGLE_ENDED_ADC0`		`ADC_SINGLE_ENDED_ADC1`		`ADC_SINGLE_ENDED_ADC2`	
+ *`ADC_SINGLE_ENDED_ADC3`		`ADC_SINGLE_ENDED_ADC4`		`ADC_SINGLE_ENDED_ADC5`	
+ *`ADC_SINGLE_ENDED_ADC6`		`ADC_SINGLE_ENDED_ADC7`		`ADC_SINGLE_ENDED_VBG`	
+ *`ADC_SINGLE_ENDED_GND`		`ADC_DIFFRENTIAL_ADC00_10X` `ADC_DIFFRENTIAL_ADC10_10X`	
+ *`ADC_DIFFRENTIAL_ADC00_200X`	`ADC_DIFFRENTIAL_ADC10_200X``ADC_DIFFRENTIAL_ADC22_10X`		
+ *`ADC_DIFFRENTIAL_ADC32_10X`	`ADC_DIFFRENTIAL_ADC22_200X``ADC_DIFFRENTIAL_ADC32_200X`
+ *`ADC_DIFFRENTIAL_ADC01_1X`	`ADC_DIFFRENTIAL_ADC11_1X`	`ADC_DIFFRENTIAL_ADC21_1X`	
+ *`ADC_DIFFRENTIAL_ADC31_1X`	`ADC_DIFFRENTIAL_ADC41_1X`	`ADC_DIFFRENTIAL_ADC51_1X`	
+ *`ADC_DIFFRENTIAL_ADC61_1X`	`ADC_DIFFRENTIAL_ADC71_1X`	`ADC_DIFFRENTIAL_ADC02_1X`	
+ *`ADC_DIFFRENTIAL_ADC12_1X`	`ADC_DIFFRENTIAL_ADC22_1X`	`ADC_DIFFRENTIAL_ADC32_1X`	
+ *`ADC_DIFFRENTIAL_ADC42_1X`	`ADC_DIFFRENTIAL_ADC52_1X`	
+ *@Return: 1)BusyFunction: in case of ADC is working on another conversion
+		   2)-1: in case of ADC flag is not set (probably, hardware problem in ADC peripheral) 
+		   3)NoError : in case of function is executed successfully
+ */
+Error_t ADC_StartConversionSynch(uint8_t Channel,uint16_t *ReadingValue);
+/*
+ *@brief: This function is use to start ADC conversion using interrupt 
+ *@Para :  1) ADC_Channel
+ *`ADC_SINGLE_ENDED_ADC0`		`ADC_SINGLE_ENDED_ADC1`		`ADC_SINGLE_ENDED_ADC2`	
+ *`ADC_SINGLE_ENDED_ADC3`		`ADC_SINGLE_ENDED_ADC4`		`ADC_SINGLE_ENDED_ADC5`	
+ *`ADC_SINGLE_ENDED_ADC6`		`ADC_SINGLE_ENDED_ADC7`		`ADC_SINGLE_ENDED_VBG`	
+ *`ADC_SINGLE_ENDED_GND`		`ADC_DIFFRENTIAL_ADC00_10X` `ADC_DIFFRENTIAL_ADC10_10X`	
+ *`ADC_DIFFRENTIAL_ADC00_200X`	`ADC_DIFFRENTIAL_ADC10_200X``ADC_DIFFRENTIAL_ADC22_10X`		
+ *`ADC_DIFFRENTIAL_ADC32_10X`	`ADC_DIFFRENTIAL_ADC22_200X``ADC_DIFFRENTIAL_ADC32_200X`
+ *`ADC_DIFFRENTIAL_ADC01_1X`	`ADC_DIFFRENTIAL_ADC11_1X`	`ADC_DIFFRENTIAL_ADC21_1X`	
+ *`ADC_DIFFRENTIAL_ADC31_1X`	`ADC_DIFFRENTIAL_ADC41_1X`	`ADC_DIFFRENTIAL_ADC51_1X`	
+ *`ADC_DIFFRENTIAL_ADC61_1X`	`ADC_DIFFRENTIAL_ADC71_1X`	`ADC_DIFFRENTIAL_ADC02_1X`	
+ *`ADC_DIFFRENTIAL_ADC12_1X`	`ADC_DIFFRENTIAL_ADC22_1X`	`ADC_DIFFRENTIAL_ADC32_1X`	
+ *`ADC_DIFFRENTIAL_ADC42_1X`	`ADC_DIFFRENTIAL_ADC52_1X`	
+ *		  2)ISR_Function: Function that will be executed when ADC conversion completes
+ *		   
+ *@Return: 1)BusyFunction: in case of ADC is working on another conversion
+		   2)NullPointer: in case of the passed function isn't exist
+		   3)NoError : in case of function is executed successfully
+ */
+Error_t ADC_StartConversionAsynch(uint8_t Channel , void (*ADCInterruptFunction)(void));
+
+#endif /* ADC_H_ */
